@@ -4,7 +4,7 @@ $username = $_SESSION['username'];
 if(!empty($username)){
   echo $username;
   // $verify = new accountVerification($username);
-  $verify->checkAccount();
+  // $verify->checkAccount();
 }else {
   header('location:index.php');
 }
