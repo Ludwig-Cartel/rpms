@@ -1,4 +1,5 @@
 <?php
+session_start();
  class config {
    private $user = 'root';
    private $pass = '';
