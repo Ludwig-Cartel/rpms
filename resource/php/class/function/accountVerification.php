@@ -22,27 +22,14 @@ class accountVerification extends config{
       $acctype = $row->account_type;
     }
 
-    if ($acctype != "user") {
-      if($acctype == "admin"){
-        header('location:adminHome.php');
-      }else {
-        header('location:researchAssistantPage.php');
-      }
-    }elseif ($acctype != "rAssistant" ) {
-      if($acctype == "admin"){
-        header('location:adminHome.php');
-      }else {
-        header('location:userHomePage.php');
-      }
+    if ($acctype == "user") {
     }else {
-      if($acctype == "rAssistant"){
-        header('location:researchAssistantPage.php');
-      }else {
-        header('location:userHomePage.php');
-      }
+        if($acctype == "admin"){
+          header('location:adminHome.php');
+        }else if ($acctype == "rAssistant" ){
+          header('location:researchAssistantPage.php');
+        }
     }
-
   }
-
 }
  ?>

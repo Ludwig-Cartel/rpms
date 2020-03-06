@@ -25,11 +25,13 @@ class login extends config{
     foreach ($results as $row) {
       $uname = $row->username;
       $pw = $row->password;
-      $acctype = $row->account_type;
+      $id = $row->id;
+      // $acctype = $row->account_type;
     }
     if (!empty($username) && !empty($password)) {
       if(password_verify($password,$pw) && $username == $uname){
         $_SESSION['username'] = $uname;
+        $_SESSION['id'] = $id;
         // $_SESSION['acctype'] = $acctype;
         header('location: userHomePage.php');
       }else {
