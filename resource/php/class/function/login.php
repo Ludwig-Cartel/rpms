@@ -26,21 +26,24 @@ class login extends config{
       $uname = $row->username;
       $pw = $row->password;
       $id = $row->id;
-      // $acctype = $row->account_type;
+      $acctype = $row->account_type;
     }
     if (!empty($username) && !empty($password)) {
       if(password_verify($password,$pw) && $username == $uname){
         $_SESSION['username'] = $uname;
         $_SESSION['id'] = $id;
-        // $_SESSION['acctype'] = $acctype;
-        header('location: userHomePage.php');
-      }else {
-        echo "Incorrect Username or Password";
-      }
+        if ($acctype == "user") {
+          header('location: userHomePage.php');
+        }elseif ($acctype == "rAssistant") {
+          header('location: researchAssistantPage.php');
+        }else {
+          header('location: adminHome.php');
+        }
     }else {
       $msg = "Please fill in the following fields";
       echo "<script type='text/javascript'>alert('$msg');</script>";
     }
   }
+ }
 }
 ?>
