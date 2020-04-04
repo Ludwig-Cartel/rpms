@@ -1,0 +1,14 @@
+#un,#pw,#submit{
+  width: 300px;
+}
+
+
+.all{
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.navbar{
+  width: 100vw;
+  height: 100px;
+}

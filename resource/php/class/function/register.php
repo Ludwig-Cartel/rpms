@@ -8,7 +8,6 @@ class register extends config{
   public $mi;
   public $school_id;
   public $department;
-  public $course;
   public $email;
   public $username;
   public $password;
@@ -58,7 +57,10 @@ class register extends config{
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $sql =  "INSERT INTO `user_account_tbl`(`firstname`,`lastname`,`mi`,`school_id`,`department`,`course`,`email`,`username`,`password`,`cpassword`) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $data = $pdo->prepare($sql);
-        $data->execute([$firstname,$lastname,$mi,$school_id,$department,$course,$email,$username,$hash,$hash]);
+        if ($data->execute([$firstname,$lastname,$mi,$school_id,$department,$course,$email,$username,$hash,$hash])) {
+          $msg = "You have succesfully registered your accout";
+          echo "<script type='text/javascript'>alert('$msg');</script>";
+        }
       }
     }
   }

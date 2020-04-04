@@ -1,0 +1,50 @@
+/* under here needs to go */
+.html{
+ font-family: 'Montserrat';
+}
+#navb{
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+}
+#navl1{
+  color:#d75092;
+}
+#navl1:hover{
+  color:#9f3b6c;
+}
+#ddl{
+  color:#d75092;
+}
+#ddl:hover{
+  color:#9f3b6c;
+}
+ #accnav a{
+  color:#d75092;
+}
+
+#accnav a:hover{
+  color:#9f3b6c;
+}
+#logoutnav a{
+  color:#d75092;
+}
+
+#logoutnav a:hover{
+  color:#9f3b6c;
+}
+
+#main-header,h{
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,0.55);
+  background-color:#d75092;
+}
+.table,.search,.pagecon{
+   margin: auto;
+   width: 80% !important;
+   text-align: center;
+}
+
+#center-header{
+  text-align: center;
+}
+#center-header h1{
+  margin-left: -40px
+}
