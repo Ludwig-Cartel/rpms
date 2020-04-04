@@ -4,9 +4,13 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/view.p
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/approvalAdmin.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/search.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/logout.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/accountVerification.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/archivesAdmin.php';
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
+$check = new accountVerification($id);
+$check->checkAccount();
+$check->isAdmin();
 if(isset($username)){
   $username = new user($id);
   $view = new view;
@@ -71,11 +75,11 @@ if(isset($_GET['archived'])){
       <!--  -->
       <li class="nav-item dropdown">
         <a id="navl1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-user-circle"></i> Admin Tools
+        <i class="fas fa-toolbox"></i> Admin Tools
         </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a id="ddl" class="dropdown-item" href=""><i class="fa fa-sign-out"></i> </a>
-      
+        <a id="ddl" class="dropdown-item" href="viewAccount.php"><i class="fa fa-sign-out"></i>Account List</a>
+
       </div>
     </li>
         <li class="nav-item dropdown">

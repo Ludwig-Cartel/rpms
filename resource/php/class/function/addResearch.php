@@ -65,7 +65,7 @@ class addResearch extends config{
 
     $config = new config;
     $pdo = $config->connect();
-    $sql = "INSERT INTO `for_research_approval`(`research_title`,`r_first_name`,`r_mi`,`r_last_name`,`year`,`research_file`,`status`) VALUES (?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO `research_tbl`(`research_title`,`r_first_name`,`r_mi`,`r_last_name`,`year`,`research_file`,`status`) VALUES (?,?,?,?,?,?,?)";
     $data = $pdo->prepare($sql);
 
     if ($data->execute([$title,$fname,$lname,$mi,$year,$file,$status])){
@@ -117,18 +117,17 @@ class addResearch extends config{
     // $extension = end($temp);
     // $upload_file = $_FILES ['pdf']['title'];
     // move_uploaded_files($_FILES['pdf']['tmp_name'],"resource/pdf/".$_FILES['pdf']['name']);
-
+    $approval = 'approved';
     $config = new config;
     $pdo = $config->connect();
-    $sql = "INSERT INTO `approved_research`(`research_title`,`r_first_name`,`r_mi`,`r_last_name`,`year`,`research_file`,`status`) VALUES (?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO `research_tbl`(`research_title`,`r_first_name`,`r_mi`,`r_last_name`,`year`,`research_file`,`status`,`approval`) VALUES (?,?,?,?,?,?,?,?)";
     $data = $pdo->prepare($sql);
 
-    if ($data->execute([$title,$fname,$lname,$mi,$year,$file,$status])){
+    if ($data->execute([$title,$fname,$lname,$mi,$year,$file,$status,$approval])){
       echo '<script language="javascript">';
-      echo 'alert("Your research has been submitted!")';
+      echo 'alert("Your research has been added!")';
       echo '</script>';
     }
-
   }
 }
 ?>

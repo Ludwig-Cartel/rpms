@@ -1,5 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/addResearch.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/accountVerification.php';
+$id = $_SESSION['id'];
+$check = new accountVerification($id);
+$check->checkAccount();
+$check->isAdmin();
 if (isset($_POST['submit'])) {
   $addResearch = new addResearch($_POST['title'],$_POST['fname'],$_POST['lname'],$_POST['mi'],$_POST['year'],$_POST['status']);
   $addResearch->submitResearchApproved();

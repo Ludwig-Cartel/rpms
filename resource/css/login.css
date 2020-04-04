@@ -2,8 +2,10 @@
   width: 300px;
 }
 
-.line{
-  width: 500px;
+
+.all{
+  height: 100vh;
+  padding-top: 100px;
 }
 
 .navbar{

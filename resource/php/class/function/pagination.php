@@ -27,7 +27,7 @@ class pagination{
       {
         $pagination .= '<div class=\'pagination\'>';
         //prev button
-        if ($page >= 1)
+        if ($page > 1)
           $pagination.= '<a id="page" id"page" href=\''.$url.'?page='.$prev.'\'>&laquo; prev</a>';
         else
           $pagination.= '<span id="spanD" span class=\'disabled\'>&laquo prev</span>';

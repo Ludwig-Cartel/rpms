@@ -1,15 +1,14 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/user.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/view.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/approval.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/approvalAdmin.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/search.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/logout.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/archives.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/state.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/accountVerification.php';
 $id = $_SESSION['id'];
 $check = new accountVerification($id);
 $check->checkAccount();
-$check->isResearchAssistant();
 $username = $_SESSION['username'];
 if(isset($username)){
   $username = new user($id);
@@ -19,9 +18,10 @@ if(isset($username)){
 }else {
   header('location:index.php');
 }
-if(isset($_GET['archived'])){
-  $archive = new archives($_GET['rid']);
-  $archive->archivedInAprroved();
+
+if(isset($_GET['aid'])){
+  $archive = new state($_GET['aid'],$_GET['state']);
+  $archive->accountActivation();
 }
 ?>
 
@@ -57,7 +57,7 @@ if(isset($_GET['archived'])){
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a  id="navl1" class="nav-link" href="researchAssistantPage.php"><i class="fa fa-home"></i> Home</a>
+          <a  id="navl1" class="nav-link" href="adminHome.php"><i class="fa fa-home"></i> Home</a>
         </li>
         <!-- <li class="nav-item">
           <a  id="navl1" class="nav-link" href="ResearchSubmit.php"><i class="fa fa-sticky-note pr-1"></i>Submit Research</a>
@@ -67,18 +67,28 @@ if(isset($_GET['archived'])){
           <i class="fa fa-user-circle"></i> Work
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a id="ddl" class="dropdown-item" href="addResearch.php"><i class="fa fa-sign-out"></i> Add Research</a>
-          <a id="ddl" class="dropdown-item" href="pendingWork.php"><i class="fa fa-user"></i> Research Approvals</a>
-          <a id="ddl" class="dropdown-item" href="archives"><i class="fa fa-sign-out"></i> Archives</a>
+          <a id="ddl" class="dropdown-item" href="addResearchAdmin.php"><i class="fa fa-sign-out"></i> Add Research</a>
+          <a id="ddl" class="dropdown-item" href="pendingWorkAdmin.php"><i class="fa fa-user"></i> Research Approvals</a>
+          <a id="ddl" class="dropdown-item" href="archivesAdmin.php"><i class="fa fa-sign-out"></i> Archives</a>
         </div>
       </li>
+      <!--  -->
+      <li class="nav-item dropdown">
+        <a id="navl1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-user-circle"></i> Admin Tools
+        </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a id="ddl" class="dropdown-item" href=""><i class="fa fa-sign-out"></i> </a>
+
+      </div>
+    </li>
         <li class="nav-item dropdown">
           <a id="navl1" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-user-circle"></i> Accounts
           </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a id="ddl" class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-          <a id="ddl" class="dropdown-item" href="userHomePage.php?logout"><i class="fa fa-sign-out"></i> Logout</a>
+          <a id="ddl" class="dropdown-item" href="adminHome.php?logout"><i class="fa fa-sign-out"></i> Logout</a>
         </div>
       </li>
       </ul>
@@ -89,7 +99,7 @@ if(isset($_GET['archived'])){
 
   <header id="center-header" class="py-2 text-dark">
     <div class="container">
-          <h1>List of Research</h1>
+          <h1>List of Accounts</h1>
       </div>
   </header>
 
@@ -98,11 +108,11 @@ if(isset($_GET['archived'])){
     <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" aria-label="Search" required>
         <select class="form-control mr-sm-2" name="criteria" required>
         <option selected="false" disabled="disabled" value="all">Filter By:</option>
-        <option value="research_title">Title</option>
-        <option value="r_first_name">Author's First Name</option>
-        <option value="r_last_name">Author's Last Name</option>
-        <option value="year">Year</option>
-        <option value="status">Status</option>
+        <option value="firstname">First Name</option>
+        <option value="lastname">Last Name</option>
+        <option value="school_id">School ID</option>
+        <option value="username">Username</option>
+        <option value="department">Department</option>
       </select>
       <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" name="submit">
     </form>
@@ -112,9 +122,9 @@ if(isset($_GET['archived'])){
   <?php
   if (isset($_GET['submit'])) {
     $search = new search($_GET['search']);
-    $search->searchUser();
+    $search->searchAccounts();
   }else {
-    $view->viewResearch();
+    $view->viewAccounts();
   }
    ?>
 </section>

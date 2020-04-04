@@ -1,5 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/registerEmployee.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/accountVerification.php';
+$id = $_SESSION['id'];
+$check = new accountVerification($id);
+$check->checkAccount();
+$check->isAdmin();
 if(isset($_POST['submit'])){
   $register = new registerEmployee($_POST['fn'],$_POST['ln'],$_POST['mi'],$_POST['employee_id'],$_POST['department'],$_POST['email'],$_POST['username'],$_POST['pw'],$_POST['cpw']);
   $register->registerEmp();

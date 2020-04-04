@@ -12,15 +12,15 @@ if (isset($_POST['submit'])) {
   <head>
     <meta charset="utf-8">
     <link href="vendor/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resource/css/style.css" rel="stylesheet">
+    <link href="resource/css/login.css" rel="stylesheet">
     <title>RPMS | Login</title>
   </head>
   <body>
     <div class="container-fluid all">
       <div class="row justify-content-center">
         <form method="post">
-          <div class="form-group">
-            <img src="resource/img/logo.jpg" height="87" id="logo"/>
+          <div class="form-group ml-3">
+            <img src="scss/logo4.png" height="100" id="logo"/>
           </div>
            <div class="form-group">
              <label for="un">Username</label>

@@ -5,8 +5,12 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/approv
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/search.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/logout.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/archivesAdmin.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/accountVerification.php';
 $username = $_SESSION['username'];
 $id = $_SESSION['id'];
+$check = new accountVerification($id);
+$check->checkAccount();
+$check->isAdmin();
 if(isset($username)){
   $username = new user($id);
   $view = new view;

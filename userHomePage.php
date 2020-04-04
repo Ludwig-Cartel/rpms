@@ -3,8 +3,12 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/user.p
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/view.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/search.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/logout.php';
-$username = $_SESSION['username'];
+require_once $_SERVER['DOCUMENT_ROOT'].'/rpms/resource/php/class/function/accountVerification.php';
 $id = $_SESSION['id'];
+$check = new accountVerification($id);
+$check->checkAccount();
+$check->isUser();
+$username = $_SESSION['username'];
 if(isset($username)){
   $username = new user($id);
   $view = new view;
